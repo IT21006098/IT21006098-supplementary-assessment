@@ -31,8 +31,8 @@ public class UpdateStudentActivity extends AppCompatActivity {
         edName.setText(s.getName());
         edCourse.setText(s.getCourse());
         edMobile.setText(s.getMobile());
-        edTotal.setText(s.getTotalFee());
-        edPaid.setText(s.getFeePaid());
+        edTotal.setText(String.valueOf(s.getTotalFee()));
+        edPaid.setText(String.valueOf(s.getFeePaid()));
     }
 
     public void update(View view) {

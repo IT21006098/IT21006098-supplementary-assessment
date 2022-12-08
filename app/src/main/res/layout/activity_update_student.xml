@@ -20,6 +20,7 @@
                 android:id="@+id/edName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#FFFFFF"
                 android:hint="Name"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -32,6 +33,7 @@
                 android:id="@+id/edCourse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#FFFFFF"
                 android:hint="Course"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -45,6 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Mobile"
+                android:background="#FFFFFF"
                 android:maxLength="11"
                 android:inputType="number"/>
 
@@ -59,6 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Total Fee"
+                android:background="#FFFFFF"
                 android:inputType="number"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -72,7 +76,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Fee Paid"
-                android:inputType="number"/>
+                android:background="#FFFFFF"
+                android:inputType="number"
+                android:layout_marginBottom="8dp"/>
+
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,10 +87,13 @@
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#2196F3"
             android:text="Update"
             android:onClick="update"/>
 
 
     </LinearLayout>
+
+
 
 </ScrollView>
