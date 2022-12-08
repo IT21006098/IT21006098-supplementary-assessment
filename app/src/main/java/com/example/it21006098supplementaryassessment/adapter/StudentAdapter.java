@@ -1,6 +1,9 @@
 package com.example.it21006098supplementaryassessment.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.it21006098supplementaryassessment.R;
+import com.example.it21006098supplementaryassessment.activity.UpdateStudentActivity;
+import com.example.it21006098supplementaryassessment.db.DBHelper;
 import com.example.it21006098supplementaryassessment.model.Student;
 
 import java.util.ArrayList;
@@ -46,18 +51,45 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         holder.tvTotal.setText(String.valueOf(s.getTotalFee()));
         holder.tvPaid.setText(String.valueOf(s.getFeePaid()));
 
-        holder.cardUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, s.getName() + " will be updated!!!", Toast.LENGTH_SHORT).show();
-            }
+        holder.cardUpdate.setOnClickListener((view) -> {
+            Intent intent = new Intent(context, UpdateStudentActivity.class);
+            intent.putExtra("STUDENT", s);
+            context.startActivity(intent);
         });
 
-        holder.cardDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, s.getName() + " will be deleted!!!", Toast.LENGTH_SHORT).show();
-            }
+
+        holder.cardDelete.setOnClickListener((view) -> {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+            builder.setTitle("Confirmation !!!");
+            builder.setMessage("Are you sure want to delete " + s.getName() + " ?");
+            builder.setIcon(android.R.drawable.ic_menu_delete);
+            builder.setCancelable(false);
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    DBHelper dbHelper = new DBHelper(context);
+
+                    int result = dbHelper.deleteStudent(s.getId());
+
+                    if(result > 0)
+                    {
+                        Toast.makeText(context, "Delete!", Toast.LENGTH_SHORT).show();
+                        students.remove(s);
+                        notifyDataSetChanged();
+                    }
+                    else
+                    {
+                        Toast.makeText(context, "Failed!", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
+            builder.setNegativeButton("No", null);
+            builder.show();
+
         });
     }
 
@@ -80,7 +112,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
             tvTotal = v.findViewById(R.id.tvTotal);
             tvPaid = v.findViewById(R.id.tvPaid);
 
-            cardDelete = v.findViewById(R.id.cardUpdate);
+            cardDelete = v.findViewById(R.id.cardDelete);
             cardUpdate = v.findViewById(R.id.cardUpdate);
 
         }

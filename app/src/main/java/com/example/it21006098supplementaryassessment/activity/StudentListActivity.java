@@ -21,6 +21,7 @@ public class StudentListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     StudentAdapter studentAdapter;
     ArrayList<Student> students;
+    DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,14 @@ public class StudentListActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         tvTotal = findViewById(R.id.tvTotal);
 
-        DBHelper dbHelper = new DBHelper(this);
+        dbHelper = new DBHelper(this);
 
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         students = dbHelper.getAllStudents();
         tvTotal.setText("Total Students : " + students.size());
 

@@ -1,6 +1,8 @@
 package com.example.it21006098supplementaryassessment.model;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
 
     int id;
     String name;
